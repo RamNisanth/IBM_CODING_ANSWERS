@@ -1,0 +1,31 @@
+n=5
+k=7
+K=k
+plans=[[1,3,5,2],[1,4,5,3],[2,5,10,1]]
+def calculate_price(n,k,plans):
+    price=0
+    N2=[]
+    for i in range(1,n+1):
+        k=K
+        for j in range(len(plans)):
+            if i in (range(plans[j][0],plans[j][1]+1)):
+                N2.append((plans[j][2], plans[j][3]))
+        N2 = sorted(N2, key=lambda x: x[1])
+        print(N2)
+        print("k:"+str(k))
+        print("day" +str(i))
+        price = 0
+        d=0
+        while(k>0 and d<len(N2)):
+            if k > N2[d][0]:
+                k=k-N2[d][0]
+                price+=N2[d][0]*N2[d][1]
+            elif k < N2[d][0]:
+                price+=k*N2[d][1]
+                k=0
+            d+=1
+        print(price)
+        N2=[]
+
+    # return price
+print(calculate_price(n,k,plans))
